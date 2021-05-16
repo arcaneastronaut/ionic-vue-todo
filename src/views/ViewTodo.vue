@@ -25,7 +25,7 @@
       <div class="ion-padding">
         <h1>{{ todo.notes }}</h1>
         <p>
-          --Attributes could be listed here--
+          Importance: {{ todo.importance }}
         </p>
       </div>
     </ion-content>
