@@ -11,7 +11,7 @@
       </h2>
       <h3>{{ todo.notes }}</h3>
       <p>
-        {{ todo.dateCreated.getDueStatus() }}--Attributes could be listed here--
+        Importance: {{ todo.importance }}
       </p>
     </ion-label>
   </ion-item>

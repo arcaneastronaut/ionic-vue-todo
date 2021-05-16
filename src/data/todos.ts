@@ -1,9 +1,9 @@
 export enum Importance {
-  Trivial,
-  Low,
-  Normal,
-  High,
-  Critical
+  Trivial = "Trivial",
+  Low = "Low",
+  Normal = "Normal",
+  High = "High",
+  Critical = "Critical"
 }
 
 export interface Todo {
