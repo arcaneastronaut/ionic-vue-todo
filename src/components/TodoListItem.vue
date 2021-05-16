@@ -1,17 +1,17 @@
 <template>
-  <ion-item v-if="message" :routerLink="'/message/' + message.id" :detail="false" class="list-item">
-    <div slot="start" :class="!message.read ? 'dot dot-unread' : 'dot'"></div>
+  <ion-item v-if="todo" :routerLink="'/todo/' + todo.id" :detail="false" class="list-item">
+    <div slot="start" :class="!todo.read ? 'dot dot-unread' : 'dot'"></div>
     <ion-label class="ion-text-wrap">
       <h2>
-        {{ message.fromName }}
-        <span class="date">
-          <ion-note>{{ message.date }}</ion-note>
+        {{ todo.title }}
+        <span class="date-created">
+          <ion-note>{{ todo.dateCreated }}</ion-note>
           <ion-icon :icon="chevronForward" size="small" v-if="isIos()"></ion-icon>
         </span>
       </h2>
-      <h3>{{ message.subject }}</h3>
+      <h3>{{ todo.notes }}</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        --Attributes could be listed here--
       </p>
     </ion-label>
   </ion-item>
@@ -23,7 +23,7 @@ import { chevronForward } from 'ionicons/icons';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'MessageListItem',
+  name: 'TodoListItem',
   components: {
     IonIcon,
     IonItem,
@@ -31,7 +31,7 @@ export default defineComponent({
     IonNote,
   },
   props: {
-    message: Object,
+    todo: Object,
   },
   methods: {
     isIos: () => {
@@ -68,7 +68,7 @@ export default defineComponent({
   width: 95%;
 }
 
-.list-item .date {
+.list-item .date-created {
   float: right;
   align-items: center;
   display: flex;

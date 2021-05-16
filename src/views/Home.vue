@@ -18,7 +18,7 @@
       </ion-header>
       
       <ion-list>
-        <MessageListItem v-for="message in messages" :key="message.id" :message="message" />
+        <TodoListItem v-for="todo in todos" :key="todo.id" :todo="todo" />
       </ion-list>
     </ion-content>
   </ion-page>
@@ -26,15 +26,15 @@
 
 <script lang="ts">
 import { IonContent, IonHeader, IonList, IonPage, IonRefresher, IonRefresherContent, IonTitle, IonToolbar } from '@ionic/vue';
-import MessageListItem from '@/components/MessageListItem.vue';
+import TodoListItem from '@/components/TodoListItem.vue';
 import { defineComponent } from 'vue';
-import { getMessages } from '@/data/messages';
+import { getTodos } from '@/data/todos';
 
 export default defineComponent({
   name: 'Home',
   data() {
     return {
-      messages: getMessages()
+      todos: getTodos()
     }
   },
   methods: {
@@ -53,7 +53,7 @@ export default defineComponent({
     IonRefresherContent,
     IonTitle,
     IonToolbar,
-    MessageListItem
+    TodoListItem
   },
 });
 </script>

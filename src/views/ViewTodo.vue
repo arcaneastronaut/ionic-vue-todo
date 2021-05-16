@@ -8,14 +8,14 @@
       </ion-toolbar>
     </ion-header>
     
-    <ion-content :fullscreen="true" v-if="message">
+    <ion-content :fullscreen="true" v-if="todo">
       <ion-item>
         <ion-icon :icon="personCircle" color="primary"></ion-icon>
         <ion-label class="ion-text-wrap">
           <h2>
-            {{ message.fromName }}
-            <span class="date">
-              <ion-note>{{ message.date }}</ion-note>
+            {{ todo.title }}
+            <span class="date-created">
+              <ion-note>{{ todo.dateCreated }}</ion-note>
             </span>
           </h2>
           <h3>To: <ion-note>Me</ion-note></h3>
@@ -23,9 +23,9 @@
       </ion-item>
       
       <div class="ion-padding">
-        <h1>{{ message.subject }}</h1>
+        <h1>{{ todo.notes }}</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          --Attributes could be listed here--
         </p>
       </div>
     </ion-content>
@@ -36,7 +36,7 @@
 import { useRoute } from 'vue-router';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonNote, IonPage, IonToolbar } from '@ionic/vue';
 import { personCircle } from 'ionicons/icons';
-import { getMessage } from '../data/messages';
+import { getTodo } from '../data/todos';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -53,9 +53,9 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute();
-    const message = getMessage(parseInt(route.params.id as string, 10));
+    const todo = getTodo(parseInt(route.params.id as string, 10));
 
-    return { message }
+    return { todo }
   },
   components: {
     IonBackButton,
@@ -87,7 +87,7 @@ ion-item h2 {
   font-weight: 600;
 }
 
-ion-item .date {
+ion-item .date-created {
   float: right;
   align-items: center;
   display: flex;
