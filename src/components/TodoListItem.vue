@@ -1,6 +1,6 @@
 <template>
   <ion-item v-if="todo" :routerLink="'/todo/' + todo.id" :detail="false" class="list-item">
-    <div slot="start" :class="!todo.read ? 'dot dot-due' : 'dot'"></div>
+    <div slot="start" :class="todo.dateDue.getDueStatus() == 'NotDueYet' ? 'dot dot-not-due-yet' : todo.dateDue.getDueStatus() == 'DueToday' ? 'dot dot-due-today' : 'dot dot-overdue'"></div>
     <ion-label class="ion-text-wrap">
       <h2>
         {{ todo.title }}
@@ -11,7 +11,7 @@
       </h2>
       <h3>{{ todo.notes }}</h3>
       <p>
-        --Attributes could be listed here--
+        {{ todo.dateCreated.getDueStatus() }}--Attributes could be listed here--
       </p>
     </ion-label>
   </ion-item>
@@ -97,8 +97,12 @@ export default defineComponent({
   margin: 16px 10px 16px 16px;
 }
 
-.list-item .dot-due {
+.list-item .dot-not-due-yet {
   background: var(--ion-color-success);
+}
+
+.list-item .dot-due-today {
+  background: var(--ion-color-warning);
 }
 
 .list-item .dot-overdue {
