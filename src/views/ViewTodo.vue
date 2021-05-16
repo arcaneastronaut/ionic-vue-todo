@@ -15,10 +15,10 @@
           <h2>
             {{ todo.title }}
             <span class="date-created">
-              <ion-note>{{ todo.dateCreated }}</ion-note>
+              <ion-note>Created: {{ todo.dateCreated.getRepresentation() }}</ion-note>
             </span>
           </h2>
-          <h3>To: <ion-note>Me</ion-note></h3>
+          <h3><ion-note>Due: {{ todo.dateDue.getRepresentation() }}</ion-note></h3>
         </ion-label>
       </ion-item>
       
@@ -47,7 +47,7 @@ export default defineComponent({
       getBackButtonText: () => {
         const win = window as any;
         const mode = win && win.Ionic && win.Ionic.mode;
-        return mode === 'ios' ? 'Inbox' : '';
+        return mode === 'ios' ? 'Todos' : '';
       }
     }
   },

@@ -1,11 +1,11 @@
 <template>
   <ion-item v-if="todo" :routerLink="'/todo/' + todo.id" :detail="false" class="list-item">
-    <div slot="start" :class="!todo.read ? 'dot dot-unread' : 'dot'"></div>
+    <div slot="start" :class="!todo.read ? 'dot dot-due' : 'dot'"></div>
     <ion-label class="ion-text-wrap">
       <h2>
         {{ todo.title }}
         <span class="date-created">
-          <ion-note>{{ todo.dateCreated }}</ion-note>
+          <ion-note>Created: {{ todo.dateCreated.getRepresentation() }}</ion-note>
           <ion-icon :icon="chevronForward" size="small" v-if="isIos()"></ion-icon>
         </span>
       </h2>
@@ -97,7 +97,11 @@ export default defineComponent({
   margin: 16px 10px 16px 16px;
 }
 
-.list-item .dot-unread {
-  background: var(--ion-color-primary);
+.list-item .dot-due {
+  background: var(--ion-color-success);
+}
+
+.list-item .dot-overdue {
+  background: var(--ion-color-danger);
 }
 </style>
