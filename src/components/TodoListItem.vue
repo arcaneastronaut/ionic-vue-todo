@@ -1,29 +1,50 @@
 <template>
-  <ion-item v-if="todo" :routerLink="'/todo/' + todo.id" :detail="false" class="list-item">
-    <div slot="start" :class="todo.dateDue.getDueStatus() == 'NotDueYet' ? 'dot dot-not-due-yet' : todo.dateDue.getDueStatus() == 'DueToday' ? 'dot dot-due-today' : 'dot dot-overdue'"></div>
+  <ion-item
+    v-if="todo"
+    :routerLink="'/todo/' + todo.id"
+    :detail="false"
+    class="list-item"
+  >
+    <div
+      slot="start"
+      :class="
+        todo.dateDue.getDueStatus() == 'NotDueYet'
+          ? 'dot dot-not-due-yet'
+          : todo.dateDue.getDueStatus() == 'DueToday'
+          ? 'dot dot-due-today'
+          : 'dot dot-overdue'
+      "
+    ></div>
     <ion-label class="ion-text-wrap">
       <h2>
         {{ todo.title }}
         <span class="date-created">
-          <ion-note>Created: {{ todo.dateCreated.getRepresentation() }}</ion-note>
-          <ion-icon :icon="chevronForward" size="small" v-if="isIos()"></ion-icon>
+          <ion-note
+            >Created: {{ todo.dateCreated.getRepresentation() }}</ion-note
+          >
+          <ion-icon
+            :icon="chevronForward"
+            size="small"
+            v-if="isIos()"
+          ></ion-icon>
         </span>
       </h2>
       <h3>{{ todo.notes }}</h3>
-      <p>
-        Importance: {{ todo.importance }}
-      </p>
+      <p>Importance: {{ todo.importance }}</p>
+      <ion-button color="warning" v-on:click="updateTodo;">Update</ion-button>
+      <ion-button color="danger" v-on:click="deleteTodo;">Delete</ion-button>
     </ion-label>
   </ion-item>
 </template>
 
 <script lang="ts">
-import { IonIcon, IonItem, IonLabel, IonNote } from '@ionic/vue';
-import { chevronForward } from 'ionicons/icons';
-import { defineComponent } from 'vue';
+import { IonIcon, IonItem, IonLabel, IonNote } from "@ionic/vue";
+import { chevronForward } from "ionicons/icons";
+import { defineComponent } from "vue";
+import { getTodos, updateTodo, deleteTodo } from "@/data/todos";
 
 export default defineComponent({
-  name: 'TodoListItem',
+  name: "TodoListItem",
   components: {
     IonIcon,
     IonItem,
@@ -36,12 +57,12 @@ export default defineComponent({
   methods: {
     isIos: () => {
       const win = window as any;
-      return win && win.Ionic && win.Ionic.mode === 'ios';
-    }
+      return win && win.Ionic && win.Ionic.mode === "ios";
+    },
   },
   data() {
-    return { chevronForward }
-  }
+    return { chevronForward };
+  },
 });
 </script>
 
@@ -49,6 +70,7 @@ export default defineComponent({
 .list-item {
   --padding-start: 0;
   --inner-padding-end: 0;
+  cursor: pointer;
 }
 
 .list-item ion-label {
@@ -56,7 +78,7 @@ export default defineComponent({
   margin-bottom: 12px;
 }
 
-.list-item  h2 {
+.list-item h2 {
   font-weight: 600;
   margin: 0;
 }
@@ -107,5 +129,9 @@ export default defineComponent({
 
 .list-item .dot-overdue {
   background: var(--ion-color-danger);
+}
+
+ion-button {
+  align-items: center;
 }
 </style>

@@ -12,7 +12,7 @@ export interface Todo {
   dateCreated: TodoDate;
   dateDue: TodoDate;
   importance: Importance;
-  id: number;
+  id: string;
 }
 
 export class TodoDate {
@@ -49,75 +49,64 @@ export class TodoDate {
       return 'DueToday';
     }
   }
+
+  static getCurrentDate(): TodoDate {
+    const CURRENT_TIME = new Date();
+    const CURRENT_DATE = new TodoDate(CURRENT_TIME.getFullYear(), (CURRENT_TIME.getMonth() + 1), CURRENT_TIME.getDate());
+    return CURRENT_DATE;
+  }
+}
+
+function getRandomUid(): string {
+  return Math.random().toString().replace("0.", "");
 }
 
 const todos: Todo[] = [
   {
     title: 'TodoTitle1',
-    notes: 'Notes: Not due yet',
+    notes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     dateCreated: new TodoDate(2021, 5, 16),
-    dateDue: new TodoDate(2021, 5, 20),
+    dateDue: new TodoDate(2022, 5, 20),
     importance: Importance.Trivial,
-    id: 0
+    id: '8362922893451246'
   },
   {
     title: 'TodoTitle2',
-    notes: 'Notes: Due today',
-    dateCreated: new TodoDate(2021, 5, 16),
-    dateDue: new TodoDate(2021, 5, 16),
+    notes: 'Nulla feugiat sem eget auctor pretium.',
+    dateCreated: TodoDate.getCurrentDate(),
+    dateDue: TodoDate.getCurrentDate(),
     importance: Importance.Normal,
-    id: 1
+    id: '5153984212833158'
   },
   {
     title: 'TodoTitle3',
-    notes: 'Notes: Overdue',
+    notes: 'Nam congue urna id hendrerit pellentesque.',
     dateCreated: new TodoDate(2021, 5, 16),
-    dateDue: new TodoDate(2021, 5, 5),
+    dateDue: new TodoDate(2020, 5, 5),
     importance: Importance.Critical,
-    id: 2
-  },
-  {
-    title: 'TodoTitle2',
-    notes: 'Notes: Due today',
-    dateCreated: new TodoDate(2021, 5, 16),
-    dateDue: new TodoDate(2021, 5, 16),
-    importance: Importance.Normal,
-    id: 1
-  },
-  {
-    title: 'TodoTitle2',
-    notes: 'Notes: Due today',
-    dateCreated: new TodoDate(2021, 5, 16),
-    dateDue: new TodoDate(2021, 5, 16),
-    importance: Importance.Normal,
-    id: 1
-  },
-  {
-    title: 'TodoTitle2',
-    notes: 'Notes: Due today',
-    dateCreated: new TodoDate(2021, 5, 16),
-    dateDue: new TodoDate(2021, 5, 16),
-    importance: Importance.Normal,
-    id: 1
-  },
-  {
-    title: 'TodoTitle3',
-    notes: 'Notes: Overdue',
-    dateCreated: new TodoDate(2021, 5, 16),
-    dateDue: new TodoDate(2021, 5, 5),
-    importance: Importance.Critical,
-    id: 2
-  },
-  {
-    title: 'TodoTitle1',
-    notes: 'Notes: Not due yet',
-    dateCreated: new TodoDate(2021, 5, 16),
-    dateDue: new TodoDate(2021, 5, 20),
-    importance: Importance.Trivial,
-    id: 0
+    id: '5717127471562551'
   },
 ];
 
 export const getTodos = () => todos;
 
-export const getTodo = (id: number) => todos.find(todo => todo.id === id);
+export const getTodo = (id: string) => todos.find(todo => todo.id === id);
+
+// TODO: Add user input to add TODO
+export const addTodo = () => {
+  todos.push({
+    title: 'TodoTitle',
+    notes: '-',
+    dateCreated: TodoDate.getCurrentDate(),
+    dateDue: new TodoDate(2021, Math.floor(Math.random() * (12 - 1) + 1), Math.floor(Math.random() * (25 - 1) + 1)),
+    importance: Importance.Normal,
+    id: getRandomUid()
+  });
+}
+
+// TODO: UPDATE
+export const updateTodo = (id: string, title: string, notes: string, dateDue: TodoDate, importance: Importance) => { return true };
+// update = delete + add?
+
+// TODO DELETE
+export const deleteTodo = (id: string) => { return true };
